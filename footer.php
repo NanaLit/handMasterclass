@@ -4,21 +4,21 @@
         <div class="footer__contacts">
           <div class="footer__contact">
             <div class="footer__title">Позвоните нам</div>
-            <a class="footer__link" href="tel:89263505000">+ 7 (926) 350 5000</a>
+            <a class="footer__link" href="tel:<?php the_field('phone', 2);?>"><?php the_field('phone', 2);?></a>
           </div>
           <div class="footer__contact">
             <div class="footer__title">Напишите нам</div>
-            <a class="footer__link" href="mailto:Handmasterclass@gmail.com">Handmasterclass@gmail.com</a>
+            <a class="footer__link" href="mailto:<?php the_field('email', 2);?>"><?php the_field('email', 2);?></a>
           </div>
         </div>
 
         <div class="footer__right-box">
           <div class="footer__logo">
             <a href="/">
-              <img src="<?php echo bloginfo('template_url');?>/assets/img/logo.png" alt="логотип">
+                <?php the_custom_logo(); ?>
             </a>
           </div>
-          <div class="footer__copy">handmasterclass2023</div>
+          <div class="footer__copy"><?php the_field('copy', 2);?></div>
         </div>
 
         <div class="footer__dots">

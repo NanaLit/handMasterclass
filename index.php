@@ -54,13 +54,13 @@
     <div class="container">
       <div class="intro__inner">
         <div class="intro__img-box">
-          <img class="intro__img" src="<?php echo bloginfo('template_url');?>/assets/img/index/intro.png" alt="хирурги">
+          <img class="intro__img" src="<?php the_field('intro_img');?>" alt="хирурги">
           <img class="intro__img-bg" src="<?php echo bloginfo('template_url');?>/assets/img/index/intro-bg.svg" alt="хирурги">
         </div>
         <div class="intro__content">
-          <h2 class="intro__title">Кисть – <span>уникальный орган</span></h2>
+          <h2 class="intro__title"><?php the_field('intro_title');?><span><?php the_field('intro_subtitle');?></span></h2>
           <div class="intro__text">
-            <p>состоящий из 29 костей, 34 мышц, 123 связок, чувствительность которого осуществляется тремя нервами. Восстановление этой функции, утраченной в результате травмы или заболевания – главная задача кистевого хирурга. Чтобы стать специалистом в этой области требуется многолетнее обучение и постоянное совершенствование. Поэтому цель Hand Masterclass - популяризация хирургии кисти, передача знаний о методах лечения травм, их последствий и заболеваний верхней конечности.</p>
+            <p><?php the_field('intro_text');?></p>
           </div>
           <div class="intro__dots">
             <img src="<?php echo bloginfo('template_url');?>/assets/img/icons/dots.svg" alt="декоративные точки">
@@ -120,47 +120,41 @@
     <div class="container">
       <div class="courses__inner">
         <ul class="courses__slider">
-          <li class="course">
-            <div class="cours__wrapper">
-              <div class="cours__content">
-                <div class="cours__counts"><span>01</span>/03</div>
-                <div class="cours__note">Наши курсы</div>
-                <h3 class="cours__title">Курс<span>по локальным лоскутам кисти</span></h3>
-                <a href="#" class="cours__btn btn">Подробнее</a>
-              </div>
-              <div class="cours__img-box">
-                <img src="<?php echo bloginfo('template_url');?>/assets/img/courses/1.png" alt="операция на кисти">
-              </div>
-            </div>
-          </li>
+        <?php 
+            $my_posts = get_posts( array(
+                'numberposts' => -1,
+                'category_name'    => 'course-slider',
+                'orderby'     => 'date',
+                'order'       => 'ASC',
+                'post_type'   => 'post',
+                'suppress_filters' => true,
+            ) );
+    
+            global $post;
+    
+            foreach( $my_posts as $post ){
+                setup_postdata( $post );
+                ?>
+                    <li class="course">
+                        <div class="cours__wrapper">
+                        <div class="cours__content">
+                            <div class="cours__counts"><span><?php the_field('number') ?></span>/<?php the_field('count') ?></div>
+                            <div class="cours__note">Наши курсы</div>
+                            <h3 class="cours__title">Курс<span><?php the_title(); ?></span></h3>
+                            <a href="<?php the_field('course-link') ?>" class="cours__btn btn">Подробнее</a>
+                        </div>
+                        <div class="cours__img-box">
+                            <img src="<?php the_field('course-img') ?>" alt="операция на кисти">
+                        </div>
+                        </div>
+                    </li>
+                <?php
+                // формат вывода the_title() ...
+            }
+    
+            wp_reset_postdata(); 
+        ?>
 
-          <li class="course">
-            <div class="cours__wrapper">
-              <div class="cours__content">
-                <div class="cours__counts"><span>02</span>/03</div>
-                <div class="cours__note">Наши курсы</div>
-                <h3 class="cours__title">Курс<span>по нервам верхней конечности</span></h3>
-                <a href="#" class="cours__btn btn">Подробнее</a>
-              </div>
-              <div class="cours__img-box">
-                <img src="<?php echo bloginfo('template_url');?>/assets/img/courses/2.png" alt="операция на кисти">
-              </div>
-            </div>
-          </li>
-
-          <li class="course">
-            <div class="cours__wrapper">
-              <div class="cours__content">
-                <div class="cours__counts"><span>03</span>/03</div>
-                <div class="cours__note">Наши курсы</div>
-                <h3 class="cours__title">Курс<span>базовые навыки по микрохирургии</span></h3>
-                <a href="#" class="cours__btn btn">Подробнее</a>
-              </div>
-              <div class="cours__img-box">
-                <img src="<?php echo bloginfo('template_url');?>/assets/img/courses/3.png" alt="операция на кисти">
-              </div>
-            </div>
-          </li>
         </ul>
         <div class="courses__dots">
           <img src="<?php echo bloginfo('template_url');?>/assets/img/icons/dots.svg" alt="декоративные точки">
@@ -176,76 +170,37 @@
       <div class="teachers__inner">
         <h2 class="teachers__title">Наши преподаватели</h2>
         <ul class="teachers__slider">
-          <li class="teachers__item">
-            <div class="teachers__item-wrapper">
-              <div class="teachers__img-box">
-                <img src="<?php echo bloginfo('template_url');?>/assets/img/index/teachers/1.png" alt="преподователь">
-              </div>
-              <div class="teachers__name">Байтингер Андрей Владимирович</div>
-              <p class="teachers__text">Пластический хирург НИИ микрохирургии, Томск</p>
-            </div>
-          </li>
 
-          <li class="teachers__item">
-            <div class="teachers__item-wrapper">
-              <div class="teachers__img-box">
-                <img src="<?php echo bloginfo('template_url');?>/assets/img/index/teachers/2.png" alt="преподователь">
-              </div>
-              <div class="teachers__name">Николай Карпинский Антонович</div>
-              <p class="teachers__text">Еuropean Diploma in Hand Surgery
-                Реаклиник, Санкт - Петербург</p>
-            </div>
-          </li>
-
-          <li class="teachers__item">
-            <div class="teachers__item-wrapper">
-              <div class="teachers__img-box">
-                <img src="<?php echo bloginfo('template_url');?>/assets/img/index/teachers/3.png" alt="преподователь">
-              </div>
-              <div class="teachers__name">Назарян Георгий Адольфович</div>
-              <p class="teachers__text">Руководитель Центра Микрохирургии Кисти ГКБ им. А.К. Ерамишанцева, Москва, Еuropean Diploma in Hand Surgery</p>
-            </div>
-          </li>
-
-          <li class="teachers__item">
-            <div class="teachers__item-wrapper">
-              <div class="teachers__img-box">
-                <img src="<?php echo bloginfo('template_url');?>/assets/img/index/teachers/4.png" alt="преподователь">
-              </div>
-              <div class="teachers__name">Сухинин Тимофей Юрьевич</div>
-              <p class="teachers__text">Заведующий микрохирургическим отделением Центра Микрохирургии Кисти ГКБ им. А.К. Ерамишанцева, Москва</p>
-            </div>
-          </li>
-
-          <li class="teachers__item">
-            <div class="teachers__item-wrapper">
-              <div class="teachers__img-box">
-                <img src="<?php echo bloginfo('template_url');?>/assets/img/index/teachers/5.png" alt="преподователь">
-              </div>
-              <div class="teachers__name">Хентов Алексей Александрович</div>
-              <p class="teachers__text">Травматолог-ортопед отделения хирургии кисти и микрохирургии ГКБ им. С.С. Юдина, Москва</p>
-            </div>
-          </li>
-
-          <li class="teachers__item">
-            <div class="teachers__item-wrapper">
-              <div class="teachers__img-box">
-                <img src="<?php echo bloginfo('template_url');?>/assets/img/index/teachers/6.png" alt="преподователь">
-              </div>
-              <div class="teachers__name">Шакиров Артём Ильдарович</div>
-              <p class="teachers__text">Травматолог - ортопед Центра Микрохирургии Кисти ГКБ им. А.К. Ерамишанцева</p>
-            </div>
-          </li>
-
-          <li class="teachers__item">
-            <div class="teachers__item-wrapper">
-              <div class="teachers__img-box">
-                <img src="<?php echo bloginfo('template_url');?>/assets/img/index/teachers/7.png" alt="преподователь">
-              </div>
-              <div class="teachers__name">Байтингер Андрей Владимирович</div>
-              <p class="teachers__text">Пластический хирург НИИ микрохирургии, Томск</p>
-            </div>
-          </li>
+        <?php 
+            $my_posts = get_posts( array(
+                'numberposts' => -1,
+                'category_name'    => 'teaches-slider',
+                'orderby'     => 'date',
+                'order'       => 'ASC',
+                'post_type'   => 'post',
+                'suppress_filters' => true,
+            ) );
+    
+            global $post;
+    
+            foreach( $my_posts as $post ){
+                setup_postdata( $post );
+                ?>
+                    <li class="teachers__item">
+                        <div class="teachers__item-wrapper">
+                        <div class="teachers__img-box">
+                            <img src="<?php the_field('teacher-img') ?>" alt="преподаватель">
+                        </div>
+                        <div class="teachers__name"><?php the_title(); ?></div>
+                        <p class="teachers__text"><?php the_field('teacher-descr') ?></p>
+                        </div>
+                    </li>
+                <?php
+                // формат вывода the_title() ...
+            }
+    
+            wp_reset_postdata(); 
+        ?>
         </ul>
         <img class="teachers__dot" src="<?php echo bloginfo('template_url');?>/assets/img/icons/dots.svg" alt="декоративные точки">
       </div>
